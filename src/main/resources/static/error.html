@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aviation</title>
+<script src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/aviations.css">
+<link href="css/dashboard.css" rel="stylesheet">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/unit-sidebar-wrapper.css">
+<link rel="stylesheet" href="css/aviations.css">
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/menu.js"></script>
+<link href="css/dashboard.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/index.css">
+<script src="js/jquery.min.js"></script>
+<!-- <script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+<!-- <script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+<style>
+.navbar {
+	margin-bottom: 0;
+	background-color: #01579B;
+	border: 0;
+	font-size: 11px !important;
+	letter-spacing: 4px;
+	font-weight: 600;
+	 position: static;
+}
+
+.island {
+position: relative;
+text-align: center;
+}
+
+.island .island-content {
+width: 196px;
+margin: 0 auto;
+}
+
+form {
+margin-bottom: 8px;
+}
+
+.form-control {
+font-size: 16px;
+height: 36px;
+line-height: 1;
+}
+
+.btn-alternate, .island-button, .forgot-password-button {
+color: #eeeeee;
+background-color: #1b92cb;
+background: #01579B;
+box-shadow: 0 2px 0 #196084;
+border: 0 0 2px 0;
+color: white;
+font-weight: normal;
+text-transform: none;
+border-radius: 3px;
+text-transform: uppercase;
+font-size: 14px;
+height: 34px;
+padding: 0;
+line-height: 14px;
+-webkit-appearance: button;
+cursor: pointer;
+width: 100%;
+}
+
+input {
+display: block;
+margin-bottom: 20px;
+}
+
+#sample-img{
+width: 59%;
+    border: 2px solid black;
+        -webkit-filter: grayscale(100%);
+}
+.style_hy {
+    font-size: 18px;
+    color: #00695C;
+    font-weight: 700;
+}
+
+.p_name{
+    font-size: 23px;
+    color: #283593;
+}
+
+.style_header {
+    font-size: 54px;
+    color: #283593;
+    font-weight: 700;
+}
+</style>
+
+</head>
+<body>
+
+	<!-- Top Logo Header -->
+	<nav id="home"  class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">Aviation</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="index.html">HOME</a></li>
+				<li><a href="#">ABOUT ME</a></li>
+				<li><a href="#">CONTACT US</a></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	<!-- End of Top Logo Header -->
+
+
+<div id="band" class="container text-center">
+  <h3 class="style_header ">Aviation</h3>
+
+	 <div class="island">
+    <h1>Welcome!</h1>
+    <div class="island-content">
+        <span style="color:red;">Login was unsuccessful, please check your username and password</span>
+        <form name="loginform" onSubmit="return validateForm();" action="main" method="get">
+            
+            <input class="form-control" name="username" type="text" placeholder="Email" autofocus="autofocus" />
+            <input class="form-control" autocomplete="off" name="password" type="password" placeholder="Password" />
+            <input type="submit" value="Sign in" class="island-button" />
+        </form>
+        
+        <div class="saml-login">
+            
+            
+            
+        </div>
+</div>
+
+<script>
+    function validateForm() {
+        var un = document.loginform.username.value;
+        var pw = document.loginform.password.value;
+        var username = "username"; 
+        var password = "password";
+        if ((un == username) && (pw == password)) {
+            window.location = "index.html";
+            return false;
+        }
+       
+      }
+</script>
+
+
+</body>
+</html>

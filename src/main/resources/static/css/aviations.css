@@ -1,0 +1,60 @@
+.color-wrapper {
+    width: 54%;
+    background: aliceblue;
+}
+input.color-button:hover {
+    color: white;
+	background: #283593;
+}
+
+button.filter-button:hover {
+    color: white;
+	background:#8462ea ;
+}
+
+span#filter-Title {
+    color: #2f71b7;
+    font-size: 24px;
+    font-style: inherit;
+    font-family: sans-serif;
+    background: #e6e0d8;
+    stroke: #040404;
+    stroke-width: 22px;
+}
+form#filter-form {
+    background: aliceblue;
+    color: brown;
+}
+
+.checkbox.filter-checkbox {
+    font-size: 14px;
+    background: #d1ded1;
+    color: #0e0e0e;
+    font-style: inherit;
+    stroke: #bdbdb4;
+    stroke-width: 45px;
+}
+.filter-action-button {
+    background: #d0f2f3;
+    font-size: 34px;
+}
+.form-group.date-range {
+    background: #d7f5f5;
+}
+div#serial-number {
+    display: none;
+}
+div#mfg-part-number{
+	display: none;
+}
+div#no-of-removal{
+	display: none;
+}
+.filter-wrapper{
+    float: left;
+	
+	
+}
+.filter-wrapper.container {
+    width: 1000px;
+}

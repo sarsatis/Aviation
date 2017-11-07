@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aviation Graph Screen</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/index.css">
+<!-- <script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">  -->
+<!-- <script -->
+<script src="js/html2canvas.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="js/jquery.qtip.min.js"></script>
+
+<script src="js/menu.js"></script>
+<!-- src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+<script
+	src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+<!-- Include Required Prerequisites -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" /> -->
+
+<!-- Include Date Range Picker -->
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" /> -->
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="js/vis.js"></script>
+<link href="css/vis.css" rel="stylesheet"
+	type="text/css" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css"
+	rel="stylesheet" type="text/css" />
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<!-- <script src="js/jquery1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="Utility.js"></script>
+
+<style>
+.black_overlay {
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1001;
+	-moz-opacity: 0.8;
+	opacity: .80;
+	filter: alpha(opacity = 80);
+}
+
+.white_content {
+	font-size: 25px;
+	display: none;
+	position: absolute;
+	top: 40%;
+	left: 40%;
+	width: 20%;
+	height: 20%;
+	padding: 16px;
+	border: 1px solid black;
+	background-color: white;
+	z-index: 1002;
+	overflow: auto;
+}
+
+.triangleImage {
+	
+}
+
+.bgclass {
+	background-color: white !important;
+}
+
+input#remperbar {
+	width: 31px;
+	height: 18px;
+	margin-top: -10px;
+	margin-left: -13px;
+}
+
+.vis-item.negative {
+	
+}
+
+}
+.navbar {
+	margin-bottom: 0;
+	background-color: #01579B;
+	border: 0;
+	font-size: 11px !important;
+	letter-spacing: 4px;
+	font-weight: 600;
+	position: static;
+}
+
+.btndiv {
+	display: inline;
+	float: left;
+	padding-left: 0.5%;
+	padding-top: 0.5%;
+}
+</style>
+<style>
+body, html {
+	font-family: arial, sans-serif;
+	font-size: 11pt;
+}
+
+.button {
+	border: none;
+	color: white;
+	padding: 12px 24px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+}
+
+.triangle {
+	width: 0px;
+	height: 0px;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid red;
+	margin-left: 7px;
+}
+
+.utriangle {
+	width: 0px;
+	height: 0px;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid Yellow;
+}
+
+.ycircle {
+	background-color: Yellow;
+	border-radius: 50px;
+	padding: 12px 12px;
+}
+
+.bcircle {
+	background-color: Brown;
+	border-radius: 50px;
+	padding: 12px 12px;
+}
+
+.vis-item.negative {
+	border-color: white;
+	background-color: white;
+}
+
+.vis-item {
+	background-color: Blue;
+}
+
+.vis-item-content {
+	padding-top: 0px;
+}
+
+.vis-item .vis-item-overflow {
+	overflow: visible;
+}
+
+.vis-item .vis-item-content {
+	padding: 0px;
+}
+
+img {
+	vertical-align: top;
+}
+
+.triangleImage {
+	z-index: 150;
+}
+
+div#filterName {
+	font-size: 20px;
+	padding-bottom: 19px;
+	display: none;
+}
+
+div#description {
+	font-size: 20px;
+	padding-bottom: 19px;
+	display: none;
+}
+</style>
+
+<!-- <script src="../../Code/vis/dist/vis.js"></script> -->
+<!-- <link href="../../Code/vis/dist/vis.css" rel="stylesheet" type="text/css" /> -->
+<!-- <script src="../vis/examples/googleAnalytics.js"></script> -->
+</head>
+<body onload="removal()">
+
+	<!-- Top Logo Header -->
+	<nav id="home" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header" style="width: 62%;">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+
+				<!-- 					<img alt="client" width="11%" src="img/Cloud Image.png" style="margin-left: -584px "> -->
+				<!-- 					<img alt="client" src="img/cg.jpg" width="25%" style="margin-left: -333px; "> -->
+				<img alt="client" src="img/logo.png" height="60px" width="235px"
+					style="margin-left: -811px"> 
+<!-- 					<img alt="client" src="img/fedex.png" height="60px" width="200px"> -->
+				<!-- <a class="navbar-brand" href="index.html">Aviation</a>-->
+				<label class="navbar-brand"
+					style="margin-left: 420px; margin-bottom: -17px;">Component
+					Removal History</label> <label></label>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="afterLogin.html" style="font-size: 16px;">Home</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#" style="font-size: 16px;">File <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Save As PDF</a></li>
+							<li><a id="test" href="#" onclick="exportToExcel()">Save
+									As Excel</a></li>
+							<li><a href="#" onclick="printDiv()">Print</a></li>
+
+						</ul></li>
+
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#" style="font-size: 16px;">Menu <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+
+							<li><a href="Unit_Filter.html">Filter Editor</a></li>
+							<li><a href="Splash_Screen.html">Component Analysis</a></li>
+						</ul></li>
+
+					<li><a href="index.html" id="logout" style="font-size: 16px;">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- End of Top Logo Header -->
+
+
+
+<form action="">
+<br/><br/><br/>
+<div class="main_content bgclass" id="">
+<div style='text-align:center'>
+		<!-- div for button alignment -->
+		<!-- <div class="btndiv">-->
+		<!-- <button class="filebtn list-cust-btn">File</button> -->
+		<!-- <button class="statbtn list-cust-btn">Statistics</button> -->
+		  <div class="dropdown">
+		<!-- <input type="button" onclick="printDiv('printDiv')" value="File" class="filebtn list-clear-btn"> --> 
+		    <!-- <input class="filebtn list-clear-btn" type="button" value="File" data-toggle="dropdown">
+		<ul class="dropdown-menu">
+      <li><a href="#">Save As PDF</a></li>
+      <li><a href="#">Print</a></li>
+      
+    </ul>
+		
+		<input type="button" value="Statistics" class="statbtn list-clear-btn">
+		</div>
+		</div>-->
+		
+		<!-- <label class="right_label">Component Removal History</label>--></div></div>
+		
+	<div class="main_left">
+		
+		<div class="left_p1" style="margin-top:-7px;">
+					<!-- <div class="checkbox filter-checkbox form-group filter_left2_p2"> 
+				 <label id="tab-caption" style="border-bottom: 1px solid;width: 100%;border-bottom-color: black;">Sort</label> 
+				<input type="string" style="width: 70px;" id="sort" value="Sort">
+			<table class="tab_change">
+				
+				<tr>
+					<td><label><input type="checkbox"
+							name="Yearly">Yearly</label></td>
+				</tr>
+
+				<tr>
+				<td><label><input type="checkbox" name="Monthly">Monthly</label></td>
+				</tr>
+				<tr>
+				<td><label><input type="checkbox" name="Weekly">Weekly</label></td>
+			   </tr>
+				</table>
+			</div> -->
+		<div id="graphFilter">
+		<hr id="date_line">	
+		<div class="form-group date-range ">
+			<!-- <center><label for="dateRange" class="label_date" style="color: brown;">Extract Date</label></center> -->
+				<div class="date_range_select ">
+			<label for="fromDate" class="label_date" >Extract Date</label> 
+			<input type="text"	class="form-control" style="margin-bottom: 4px; width: 200px;" id="currentDate"  readonly="readonly" />
+			<label	for="dateRange" class="label_date">Date Range</label> 
+							 <input type="text"	class="form-control" style="width: 200px;margin-bottom: 4px;" id="dateRange" readonly="readonly" />
+					<!-- <script type="text/javascript"> -->
+						<!-- $(function() { -->
+
+						  <!-- $('input[name="datefilter"]').daterangepicker({ -->
+							  <!-- autoUpdateInput: false, -->
+							  <!-- locale: { -->
+								  <!-- cancelLabel: 'Clear' -->
+							  <!-- } -->
+						  <!-- }); -->
+
+						  <!-- $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) { -->
+							  <!-- $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY')); -->
+						  <!-- }); -->
+
+						  <!-- $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) { -->
+							  <!-- $(this).val(''); -->
+						  <!-- }); -->
+
+						<!-- }); -->
+
+			</div>
+			
+		</div>
+		
+		
+		
+		
+		<!-- Analysis By Start -->
+		
+		
+		
+				<hr id="analysisByLine">					
+		<div>
+			<div class="checkbox filter-checkbox form-group filter_left2_p2"> 
+				<label id="tab-caption" style="border-bottom: 1px solid;width: 90%;border-bottom-color: black;padding-left: 2%;">Analysis By</label> 
+			</div>
+			<table style="margin-left:10px;">
+				<tr>
+					<td><input type="radio" name="filter" id ="bestFirst" onchange="onChangeRadioButton()"/></td>
+					<td><label style="padding-left: 10px;">Best First</label></td>
+				</tr>
+				<tr>
+					<td><input type="radio" name="filter" id ="worstFirst" onchange="onChangeRadioButton()" checked/></td>
+					<td><label style="padding-left: 10px;">Worst First</label></td>
+				</tr>
+ 			</table>
+		</div>
+	
+		<!-- Installastion period bar Start -->
+		
+			<hr id="installationPeriodLine">
+			<div>
+				<div class="checkbox filter-checkbox form-group filter_left2_p2">
+					<table>
+						<tr>
+							<td style="padding-left: 8px;padding-top: 3px;"><input type="checkbox" name="instperbar" id="instperbar" checked="true" disabled="disabled"  hidden="true"/></td>
+					
+							<td><label id="tab-caption" style="border-bottom: 1px solid;width: 100%;border-bottom-color: black; padding-left: 4px !important;padding-bottom: 0px !important;">Installation Period Bar</label></td>
+						</tr>
+ 					</table>
+ 				</div>
+				<table style="margin-left:10px;">
+					<tr>
+						<td><input type="checkbox" name="installedFilter"  id="installedFilter" checked="checked"/></td>
+						<td><label>Installed</label></td>
+						<td style="padding-left: 10px;"><div class="button" style="background-color:Blue;"/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><label>Removed</label></td>
+						<td style="padding-left: 10px;"><div class="button" style="background-color:white;"></td>
+					</tr>
+		<!-- 			<tr>
+						<td><label>Still Installed Box</label></td>
+					
+						<td><div class="button" style="background-color:Pink;"></td>
+					</tr> -->
+				</table>
+			</div>
+		
+		<!-- Installastion period bar END -->
+		
+		
+		<!-- Removal period bar Start -->
+		
+		<hr id="removalPeriodLine">			
+		<div>
+			
+			<div class="checkbox filter-checkbox form-group filter_left2_p2"> 
+<!-- <label id="tab-caption" style="border-bottom: 1px solid;width: 100%;border-bottom-color: black;">Removal Period Bar</label>  -->
+				<table>
+					<tr>
+<!-- 						<td style="padding-left: 8px;padding-top: 3px;"><input type="checkbox" name="remperbar"  id="remperbar" checked="true"/></td> -->
+					
+						<td><label id="tab-caption" style="border-bottom: 1px solid;width: 100%;border-bottom-color: black; padding-left: 4px !important;padding-bottom: 0px !important;">Removal Event</label></td>
+						
+<!-- 						<td style="padding-left: 16px;"><p class="glyphicon glyphicon-triangle-bottom" style="font-size: 30px;color: red;"></p></td> -->
+					</tr>
+				 </table>
+			</div>
+		<table style="margin-left:10px;">
+				<tr>
+					<td><input type="checkbox" name="Sch"  id="Sch" checked="checked" onchange="onChangeRemovalEvent()"/></td>
+					<td><label>Scheduled</label></td>
+					<td><div class="triangle" ></div></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="unSch"  id="unSch" checked="checked" onchange="onChangeRemovalEvent()"/></td>
+					<td><label>Unscheduled</label></td>
+					<td style="padding-left:6px"><div class="utriangle" ></div></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="oCircle"  id="oCircle" checked="checked" onchange="onChangeRemovalEvent()"/></td>
+					<td><label>Others</label></td>
+					<td style="padding-left:6px"><div class="bcircle button" ></div></td>
+				</tr>
+				</table>
+
+
+		</div>
+		
+			</div>
+		
+		<!-- Removal period bar END -->
+		
+		
+		
+		
+		<!-- Analysis By END -->
+		
+		
+		
+<!-- 		<div>
+		<hr id="unitByLine">
+		<input type="string" style="width: 70px;" id="unit" value="Units by">
+		<label id="tab-caption" style="border-bottom: 1px solid;width: 95%;border-bottom-color: black;">Units by</label> 
+		<div class="checkbox filter-checkbox form-group filter_left2_p2">
+			<table class="tab_change">
+				
+				<tr>
+					<td><label><input type="checkbox"
+							name="fleet">Fleet</label></td>
+				</tr>
+
+				<tr>
+				<td><label><input type="checkbox" name="subFleetCheckBox">Sub Fleet</label></td>
+				</tr>
+				<tr>
+				<td><label><input type="checkbox" name="aircraftNumbersCheckBox">Aircraft Numbers</label></td>
+			   </tr>
+			   <tr>
+				<td><label><input type="checkbox" name="cpnCheckBox">CPN</label></td>
+			   </tr>
+			   <tr>
+				<td><label><input type="checkbox" name="mpnCheckBox">MPN</label></td>
+			   </tr>
+			   <tr>
+				<td><label><input type="checkbox" name="ataCodesCheckBox">ATA Codes</label></td>
+			   </tr>
+			   <tr>
+				<td><label><input type="checkbox" name="cpnSerialNumberCheckBox">Component Serial Numbers</label></td>
+			   </tr>
+				</table>
+			</div>
+		</div> -->
+		
+		</div>
+			<hr id="removalPeriodLine">		
+		<div style="padding-bottom: 10px;"><input style="padding-bottom: 0;margin-left: 30px;word-wrap: break-word;width: 160px;height: 50px;" name="action" type="button" value="Component Analysis" onclick="splashScreen()"/></div>
+		<div style="padding-bottom: 10px;"><input style="padding-bottom: 0;margin-left: 30px;word-wrap: break-word;width: 160px;height: 50px;" name="action" type="button" value="Filter Editor" onclick="component();"/></div>									
+		
+		
+	
+	</div>
+	</div>
+
+
+
+	<br />
+	<!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
+	<div id="filterName">
+		<b>Filter:</b> <span id=selectedFilter></span>
+	</div>
+	<div id="description">
+		<b>Description:</b> <span id=selectedItem></span>
+	</div>
+
+<div class="row">
+<div class="col-sm-9" style="width: 81%;margin-top: -10px;">
+		<div id="visualization">
+		</div>
+	</div>
+	</div>
+
+
+	<div class="col-sm-12" style="margin-top: 12px;">
+
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-2" style="padding-bottom: 10px;">
+				<input type="button" class="btn btn-primary" value="<< Previous"
+					id="previous" onclick="onPageLoad('-1')">
+			</div>
+			<div class="col-sm-5"></div>
+			<div class="col-sm-2" style="padding-bottom: 10px;">
+				<!-- <input type="button" class="form-control" class="btn btn-primary"  value="Next >>"  id="next" onclick="pagination('1')"> -->
+				<input type="button" class="btn btn-primary" value="Next >>"
+					id="next" onclick="onPageLoad('1')">
+			</div>
+		</div>
+	</div>
+	<table id="filterListTable" style="display: none;">
+	</table>
+	<script>
+  $( function() {
+	    $(document).tooltip({
+	    	track: true,
+	    	content: function () {
+	              return $(this).prop('title');
+	          }
+	      });
+  } );
+  </script>
+	
+	
+<script type="text/javascript">
+var step;
+var currentcount;
+var forStart;
+var forEnd;
+var worstFitGroupList=[];
+var worstFitItemList=[];
+var worstFitGroupListFinal=[]
+var statusValue=[];
+var worstFitItemListFinal=[]
+var exportGroupList=[];
+var exportItemList=[];
+var reportGroup=[];
+var reportItem=[];
+var Acutalreport={};
+
+
+function component(){
+	window.location="Unit_Filter.html";
+}
+
+
+function splashScreen(){
+window.location="Splash_Screen.html";
+}
+
+// Instantiate our timeline object.
+
+function printDiv() {
+	
+	    
+	       html2canvas(document.getElementById("visualization"), {
+	        onrendered: function (canvas) {
+	        		html2canvas(document.getElementById("graphFilter"), {
+	        			onrendered: function (canvas1) {
+	        				
+	        		       
+	        				 var originalContents = document.body.innerHTML;
+	        				 
+	        				 var htmlPage="<html><head><title></title></head><body>";
+	        				 
+	        				 htmlPage+="<img src='"+canvas1.toDataURL()+"' width=20% />";
+	        				 htmlPage+="<img src='"+canvas.toDataURL()+"' width=80%  />";
+	        				 htmlPage+="</body></html>";
+	        				 
+	        				 
+	        					document.body.innerHTML = htmlPage;
+	        			    	window.print();
+	        			    	document.body.innerHTML = originalContents;  
+	        	
+	        },
+	   
+	    });  
+	        	
+	        	
+	        	
+	        },
+	   
+	    });   
+	    
+	 
+}
+
+
+
+var removal=function(){
+	//////alert("report call")
+	$.ajax({
+		url : "/removalReport",
+		async: false,
+        cache: false,
+		success : function(data) { 
+			//report=data;
+			Acutalreport=data;
+			step=0;
+			forStart=0;
+			forEnd=0;
+			reportGroup=Acutalreport.groupList;
+			reportItem=Acutalreport.itemList;
+			currentcount=0;
+			onPageLoad(step)
+			
+		}
+	
+		
+	});
+	
+}
+
+
+
+
+function onChangeRemovalEvent(){
+	var scheduledFlag=document.getElementById("Sch").checked
+	var unscheduledFlag=document.getElementById("unSch").checked
+	var othersFlag=document.getElementById("oCircle").checked
+	reportGroup=[];
+	reportItem=[];
+	if(scheduledFlag || unscheduledFlag ||othersFlag)
+		onchange(scheduledFlag,unscheduledFlag,othersFlag)
+	else if(scheduledFlag==false && unscheduledFlag==false && othersFlag==false ){
+		   reportGroup=[];
+		   reportItem=[];  
+	   }
+	else{
+		reportGroup=Acutalreport.groupList;
+		reportItem=Acutalreport.itemList;
+	}
+	onPageLoad('0')
+}
+
+	 
+function onchange(scheduledFlag,unscheduledFlag,othersFlag){
+		scheduled="redTriangle";
+		unscheduled="yellowTriangle";
+		others="Others";
+		var pattern;
+	 	for(var j=0; j<Acutalreport.groupList.length; j++){ 
+	 		var counter=0;
+			for(i=0;i<Acutalreport.itemList.length;i++){
+				 if(Acutalreport.groupList[j].id == Acutalreport.itemList[i].group){
+			 			if(scheduledFlag){
+							pattern = new RegExp(scheduled);
+							if(pattern.test(Acutalreport.itemList[i].content)){
+								counter++;
+					  			reportItem.push(Acutalreport.itemList[i]);
+				          		}
+					     }
+						if(unscheduledFlag){
+							pattern = new RegExp(unscheduled);
+							if(pattern.test(Acutalreport.itemList[i].content)){
+								counter++;
+					  			reportItem.push(Acutalreport.itemList[i]);
+				          	}
+					    }
+					   if(othersFlag){
+						    pattern = new RegExp(others);
+							if(pattern.test(Acutalreport.itemList[i].content)){
+								counter++;
+					  			reportItem.push(Acutalreport.itemList[i]);
+				          	}
+					    }
+					   /* If all are unchecked */
+					   
+					   
+					   
+				 }
+			}
+		 if(counter!=0){
+	     	 	groups1={}  
+				groups1=Acutalreport.groupList[j];
+			 	reportGroup.push(groups1);
+		 }
+
+	 }
+	 //console.log(JSON.stringify(reportGroup.length))
+	 //console.log(JSON.stringify(reportItem)) 
+	 var r=[];	  
+     var itemList=[];
+	 t:for(i=0;i<Acutalreport.itemList.length;i++){
+	    	for(j=0; j<reportItem.length; j++){
+			 	if(reportItem[j].group == Acutalreport.itemList[i].group){
+					if(Acutalreport.itemList[i].content == ""){
+						 for(var z = 0; z < r.length; z++){  
+			            	if(r[z]==Acutalreport.itemList[i].id) continue t;
+			             }  
+			        	 r[r.length] = Acutalreport.itemList[i].id; 
+						 itemList.push(Acutalreport.itemList[i]);
+	     		    }
+			 	}
+		    }
+    }
+	reportItem.push.apply(reportItem,itemList)
+}
+	 
+
+
+
+function onChangeRadioButton(){ 
+	document.getElementById('visualization').innerHTML = "";
+    onPageLoad('0');
+}
+
+
+
+function getDays(fromDate, toDate){
+	var date1 = fromDate;
+	var date2 = toDate;
+
+	// First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
+	date1 = date1.split('-');
+	date2 = date2.split('-');
+
+	// Now we convert the array to a Date object, which has several helpful methods
+	date1 = new Date(date1[0], date1[1], date1[2]);
+	date2 = new Date(date2[0], date2[1], date2[2]);
+
+	// We use the getTime() method and get the unixtime (in milliseconds, but we want seconds, therefore we divide it through 1000)
+	date1_unixtime = parseInt(date1.getTime() / 1000);
+	date2_unixtime = parseInt(date2.getTime() / 1000);
+
+	// This is the calculated difference in seconds
+	var timeDifference = date2_unixtime - date1_unixtime;
+
+	// in Hours
+	var timeDifferenceInHours = timeDifference / 60 / 60;
+
+	// and finaly, in days :)
+	var timeDifferenceInDays = timeDifferenceInHours  / 24;
+
+	return timeDifferenceInDays;
+
+	}
+	
+
+
+
+
+function onPageLoad(value){
+	step=value;
+	var temp=0;
+	document.getElementById("visualization").innerHTML = "";
+	paginationStatus();
+  
+   $('input[name="installedFilter"]').unbind().click(function(){
+		if($(this).attr('checked')){
+		////console.log('block1');
+		$(this).attr('checked',false);
+		}
+		else{
+		$(this).attr('checked','checked');
+		////console.log('block2');
+		}
+		
+});
+ 
+ 
+/*
+
+$('input[name="Sch"]').click(function(){
+		
+    	////alert("checked status"+document.getElementById("remperbar"));
+		filterlogic();
+		
+       //console.log('Sch applied');
+})
+
+$('input[name="unSch"]').click(function(){
+		
+    	////alert("checked status"+document.getElementById("remperbar"));
+		filterlogic();
+		
+       //console.log('filter applied');
+})
+
+$('input[name="oCircle"]').click(function(){
+		
+    	////alert("checked status"+document.getElementById("remperbar"));
+		filterlogic();
+		
+       //console.log('filter applied');
+})*/
+
+$('input[name="installedFilter"]').click(function(){
+		
+    	////alert("checked status"+document.getElementById("remperbar"));
+		filterlogic();
+		
+//        //console.log('filter applied');
+})
+  
+	<!-- ***************Start of Filter logic for chart selection***************	 -->
+	function filterlogic(){
+
+		/*
+		if($('input[name="Sch"]').attr('checked')== 'checked'){	
+				
+			 $('.redTriangle').css('display','block');
+							//console.log('redTriangle.png all');
+		}
+		if($('input[name="Sch"]').attr('checked')== false || $('input[name="Sch"]').attr('checked') == undefined ){	
+			
+			 $('.redTriangle').css('display','none');
+							//console.log('redTriangle.png none');
+		}
+		if($('input[name="unSch"]').attr('checked')== 'checked'){	
+			
+			 $('.yellowTriangle').css('display','block');
+							//console.log('yellowTriangle.png all');
+		}
+		if($('input[name="unSch"]').attr('checked')== false || $('input[name="unSch"]').attr('checked') == undefined ){	
+			
+			 $('.yellowTriangle').css('display','none');
+							//console.log('yellowTriangle.png none');
+		}
+		if($('input[name="oCircle"]').attr('checked')== 'checked'){	
+			
+			$('.Others').css('display','block');
+			
+							//console.log('Others.png all');
+		}
+		if($('input[name="oCircle"]').attr('checked')== false || $('input[name="oCircle"]').attr('checked') == undefined ){	
+			
+			$('.Others').css('display','none');
+			
+			
+			 				//console.log('Others.png none');
+		}*/
+		if($('input[name="installedFilter"]').attr('checked')==  'checked' ){	
+			
+			
+			$('.positive').css('display','block');
+			 				//console.log('installed.png all');
+		}
+		if($('input[name="installedFilter"]').attr('checked')== false || $('input[name="installedFilter"]').attr('checked') == undefined ){	
+			
+			
+			$('.positive').css('display','none');
+			 				//console.log('installed.png none');
+		}
+	}
+	<!-- ***************End of Filter logic for chart selection***************	 -->
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // Create a DataSet (allows two way data-binding)
+   var items = new vis.DataSet({
+        type: { start: 'Moment', end: 'Moment' }
+    }); 
+   var groups = new vis.DataSet();
+   var length=reportGroup.length;
+   if(step==0)
+   {
+    forStart=0;
+       forEnd=25;
+       currentcount=1;
+   }else if(forEnd==length){
+		forEnd=forStart;
+		forStart=forStart-25;
+		currentcount=currentcount-1;
+	}else if(step==1){
+		forStart=forStart+25;
+		forEnd=forEnd+25;
+		currentcount=currentcount+1;
+	}else if(step==-1){
+		forStart=forStart-25;
+		forEnd=forEnd-25;
+		currentcount=currentcount-1;
+	}else if(step==0){
+		forStart=0;
+		forEnd=25;
+		currentcount=1;
+	}
+   
+	if(forEnd>length){
+		forEnd=length;
+	}
+   
+
+   
+   if(step==0){
+		  worstFitGroupListFinal=[]
+		  worstFitItemListFinal=[]
+		   worstFitGroupList=[];
+		   worstFitItemList=[];
+		   sortedGroupFinalList=[];
+		   exportGroupList=[];
+		   exportItemList=[];
+		   
+		   
+		   //console.log(JSON.stringify(reportGroup));
+			//console.log(JSON.stringify(reportItem));
+		   for(var i=0; i<reportGroup.length; i++){ 
+			   bestCount=0
+			   totalInstalledDays=0
+			   worstCount= reportGroup.length
+					for(j=0 ; j<reportItem.length; j++){ 		
+							if(reportGroup[i].id == reportItem[j].group){ 
+								if(reportItem[j].content!=""){
+										   bestCount++
+										   worstCount--
+								   }
+								else{
+								
+								 installedDays=getDays(reportItem[j].start,reportItem[j].end)
+								 totalInstalledDays=totalInstalledDays+installedDays
+								}
+							}
+					}
+				
+				groups1={}  
+				groups1["id"]=reportGroup[i].id;
+				groups1["bestCount"]=bestCount;
+				groups1["worstCount"]=worstCount;
+				groups1["totalInstalledDays"]=totalInstalledDays;
+				groups1["content"]=reportGroup[i].content;
+				groups1["cmpySerialNo"]=reportGroup[i].cmpySerialNo;
+				groups1["mfgPartNo"]=reportGroup[i].mfgPartNo;
+				groups1["companyPartNo"]=reportGroup[i].companyPartNo;
+				groups1["mnfgSerialNo"]=reportGroup[i].mnfgSerialNo;
+				groups1["classification"]=reportGroup[i].classification;
+				groups1["description"]=reportGroup[i].description;
+				groups1["tailNo"]=reportGroup[i].tailNo;
+				groups1["fleetNo"]=reportGroup[i].fleetNo;
+				groups1["subfleetNo"]=reportGroup[i].subfleetNo;
+				groups1["ataSystemNo"]=reportGroup[i].ataSystemNo;
+				groups1["status"]=reportGroup[i].status;
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					
+					
+					
+					
+				
+				
+				
+				worstFitGroupList.push(groups1);
+			  
+					if(temp<bestCount){
+						temp=bestCount;
+					}
+		   
+			   }
+
+		   
+		   
+		   for(var i=0; i< worstFitGroupList.length; i++){
+		  			for(j=0 ; j<reportItem.length; j++){ 
+		  					if(worstFitGroupList[i].id ==reportItem[j].group){
+		  						worstFitItemList.push(reportItem[j])
+		  					}
+		  			}
+		
+		   }
+		   
+      worstFit= document.getElementById("worstFirst").checked;
+   	  bestFit= document.getElementById("bestFirst").checked;
+  
+   
+   
+   	  if(worstFit) {
+			for(var k=temp;k>=0; k--){
+			   for(var i=0; i<worstFitGroupList.length; i++){
+					if(worstFitGroupList[i].bestCount == k){
+						worstFitGroupListFinal.push(worstFitGroupList[i]);
+							
+					}
+					
+				}
+			  
+					  
+					
+					   worstFitGroupListFinal=worstFitGroupListFinal.sort(function(a, b){
+					   return a.totalInstalledDays-b.totalInstalledDays
+						})
+						sortedGroupFinalList.push.apply(sortedGroupFinalList,worstFitGroupListFinal)
+						worstFitGroupListFinal=[]
+						
+		}
+			
+		
+			////console.log(JSON.stringify(sortedGroupFinalList)) 
+		 }
+
+   	  if(bestFit) {
+			for(var k=temp;k>=0; k--){
+				   for(var i=0; i<worstFitGroupList.length; i++){
+						if(worstFitGroupList[i].bestCount == k){
+							worstFitGroupListFinal.push(worstFitGroupList[i]);
+								
+						}
+						
+					}
+				  
+						  
+						   worstFitGroupListFinal=worstFitGroupListFinal.sort(function(a, b){
+						   return a.totalInstalledDays-b.totalInstalledDays
+							})
+							sortedGroupFinalList.push.apply(sortedGroupFinalList,worstFitGroupListFinal)
+							worstFitGroupListFinal=[]
+							
+			}
+		    sortedGroupFinalList1=[];
+			temp_length=sortedGroupFinalList.length;
+			
+		
+			for(i=temp_length-1;i>=0;i--){
+				sortedGroupFinalList1.push(sortedGroupFinalList[i]);
+	
+			}
+			sortedGroupFinalList=[];
+			sortedGroupFinalList=sortedGroupFinalList1;
+			
+	 } 
+	    
+	   
+   	  worstFitItemListFinal=worstFitItemList;
+   	  
+    	exportGroupList=sortedGroupFinalList;
+     	exportItemList=worstFitItemListFinal;
+	   
+	   
+ }
+ 
+   
+worstFitGroupListFinal1=[]
+worstFitItemListFinal1=[]
+   
+for(var i=forStart; i<forEnd; i++){
+	for(j=0; j<worstFitItemListFinal.length; j++){ 
+			if(sortedGroupFinalList[i].id == worstFitItemListFinal[j].group){ 
+				worstFitItemListFinal1.push(worstFitItemListFinal[j])
+				}
+	} 
+
+worstFitGroupListFinal1.push(sortedGroupFinalList[i]);
+}
+
+temp=0;
+end=forEnd-forStart
+
+
+if(worstFit){
+	for(var i=temp; i<end;  i++){
+		   worstFitGroupListFinal1[i].worstCount=temp++;
+		 }
+}
+
+if(bestFit){
+	 temp=0;
+	 for(var i=temp; i<end;  i++){
+	   worstFitGroupListFinal1[i].bestCount=temp++;
+	 }
+}
+groups.add(worstFitGroupListFinal1)  
+items.add(worstFitItemListFinal1) 
+var endDate=statusValue[2];
+var startDate=statusValue[3];
+var container = document.getElementById('visualization');
+var options= 
+		{
+    	    dataAttributes: 'all',
+  	        zoomable: true,
+  	    	clickToUse: false,
+  	    	selectable: false,
+  	        editable: false,
+  	        stack: false,
+  	        showCurrentTime: false,
+  	        start:startDate,
+  	        end:endDate,
+  	        orientation:{	
+  	        	axis:'both'
+  	        }
+ 		 };
+		
+ 
+    	worstFit= document.getElementById("worstFirst").checked;
+   	    bestFit= document.getElementById("bestFirst").checked;
+   	 
+    	if(worstFit){ 		
+    		options["groupOrder"]="worstCount";
+    		}
+    	if(bestFit){
+    		options["groupOrder"]="bestCount";
+    	}
+    
+    var timeline = new vis.Timeline(container, items, groups, options); 
+    /*function onClick (event) {
+    	  var properties = timeline.getEventProperties(event);
+    	  //console.log(properties);
+    	  if(properties.item){
+    		  for (i = 0; i < report.itemList.length; i++) { 
+			    if(properties.item == report.itemList[i].id){
+			    	if(report.itemList[i].className == 'negative'){
+			    		document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block';
+			    	}
+			    }
+			  }
+    		  
+    	  }
+    	  
+    	}
+    	container.addEventListener('click', onClick) ;*/
+      	paginationStatus();
+  
+	
+	<!-- //////////Timeline range////////// -->
+	
+	
+
+}
+
+
+function pagination(value) {
+	document.getElementById('visualization').innerHTML = "";
+     var items = new vis.DataSet({
+          type: { start: 'Moment', end: 'Moment' }
+      }); 
+     var groups = new vis.DataSet();
+     groups.add(reportGroup);
+     items.add(reportItem);
+     var container = document.getElementById('visualization');
+     var options = {
+    
+         zoomable: false,
+      	   clickToUse: true,
+          editable: false,
+          stack: false
+      };
+
+      var timeline = new vis.Timeline(container, items, groups, options);
+      
+      function onClick (event) {
+      	  var properties = timeline.getEventProperties(event);
+      	  if(properties.item){
+      		  for (i = 0; i < reportItem.length; i++) { 
+  			    if(properties.item ==reportItem[i].id){
+  			    	if(reportItem[i].className == 'negative'){
+  			    		document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block';
+  			    	}
+  			    }
+  			  }
+      		  
+      	  }
+      	  
+      	}
+      	container.addEventListener('click', onClick) ;  	
+      	paginationStatus();
+
+}
+
+
+var paginationStatus=function(){
+
+	$.ajax({
+		url : "/paginationStatus",
+		async: false,
+        cache: false,
+		success : function(data) { 
+					status=data;		
+					statusValue=[];
+					var nextStatus;
+					var previousStatus;
+					statusValue =status.split(',');
+					loadvalue.push(statusValue);
+					 var actual=reportGroup.length;
+					 var actualLength=Math.ceil(actual/25);
+					if(currentcount == actualLength && actualLength != 1){
+						document.getElementById("next").disabled=true;
+						document.getElementById("previous").disabled=false;
+						
+					}else if(currentcount==1 && actualLength > 1){
+						document.getElementById("next").disabled=false;
+						document.getElementById("previous").disabled=true;
+					}else if(currentcount==1 && actualLength == 1){
+						document.getElementById("next").disabled=true;
+						document.getElementById("previous").disabled=true;
+					}else{
+						document.getElementById("next").disabled=false;
+						document.getElementById("previous").disabled=false;
+					}
+
+					if(statusValue[5]=="filterPage"){
+						document.getElementById("selectedFilter").innerHTML= statusValue[4];
+						document.getElementById("description").style.display='none';
+						document.getElementById("filterName").style.display='block';
+					document.getElementById("dateRange").value = statusValue[0]+" - "+statusValue[1];
+						}
+					else{
+						document.getElementById("selectedItem").innerHTML= statusValue[4]
+						document.getElementById("description").style.display='block';
+						document.getElementById("filterName").style.display='none';
+						dateRange();
+					document.getElementById("dateRange").value = statusValue[0]+" - "+statusValue[1];
+						
+				     }
+				/* 	if()
+					document.getElementById("dateRange").value = statusValue[0]+" - "+statusValue[1];
+					 */
+					var today = new Date();
+					var dd = today.getDate();
+					var mm = today.getMonth()+1; //January is 0!
+					var yyyy = today.getFullYear();
+					if(dd<10){
+					    dd='0'+dd
+					} 
+					if(mm<10){
+					    mm='0'+mm
+					} 
+					var fromDate = dd+'/'+mm+'/'+yyyy;
+					document.getElementById("currentDate").value = fromDate;					
+		}
+	
+		
+	});
+	
+}
+
+function dateRange(){
+	$.ajax({
+		url : "/getSplashDate",
+		
+		success : function(data){
+			
+			
+			
+
+			
+			var dateRange =data.split(',');
+		var tempFrom=dateRange[0].split("-");
+		
+		var fromDate=tempFrom[2]+"/"+tempFrom[1]+"/"+tempFrom[0];
+		
+			var tempTo=dateRange[1].split("-");
+			
+			var toDate=tempTo[2]+"/"+tempTo[1]+"/"+tempTo[0];
+// 			alert(toDate);
+			document.getElementById("dateRange").value = fromDate+" - "+toDate;
+			document.getElementById("currentDate").value = toDate;
+		},
+		
+		error : function(data){
+			
+		}
+		
+	});
+		
+		
+
+
+}
+
+function exportToExcel(){
+	////console.log(JSON.stringify(exportGroupList));
+	////console.log(JSON.stringify(exportItemList));
+				$("#filterListTable tr").remove();
+				 		
+									   	var tr=[];
+										tr.push("<tr>");
+										
+										tr.push("<th>Start Date</th>");
+										tr.push("<th>End  Date</th>");
+										
+										tr.push("<th>Company Serial No</th>");
+										tr.push("<th>manufacture Part No</th>");
+										tr.push("<th>Company PartNo</th>");
+										tr.push("<th>manufacture Serial No</th>");
+										tr.push("<th>Classification</th>");
+										tr.push("<th>Description</th>");
+										tr.push("<th>Tail No</th>");
+										tr.push("<th>Fleet No</th>");
+										tr.push("<th>Sub-Fleet No</th>");
+										tr.push("<th>ATA System No</th>");
+										tr.push("<th>status</th>");
+								
+										
+										/* tr.push("<th>Classification</th>");
+										tr.push("<th>Description</th>");
+										tr.push("<th>Sub Fleet No</th>");
+										tr.push("<th>Manufacturing Part No</th>");
+										tr.push("<th>Tail No</th>"); */
+										tr.push("<th>Installation Date</th>");
+										tr.push("<th>Installation Station</th>");
+										tr.push("<th>Installation Department</th>");
+										
+										
+				
+										tr.push("<th>Removal Date</th>");
+										tr.push("<th>Removal Station</th>");
+										tr.push("<th>Removal Department</th>");
+										tr.push("<th>Removal Reason</th>");
+										tr.push("<th>Repair Date</th>");
+										tr.push("<th>Repair Station</th>");
+										tr.push("<th>Repair Department</th>");
+										tr.push("<th>Repair Service Order Number</th>");
+					
+										tr.push('</tr>');
+													
+									
+										
+										
+										
+										
+	//			//console.log(JSON.stringify(exportItemList))
+				  for(var i=0; i<exportGroupList.length; i++){ 
+							for(j=0 ; j<exportItemList.length; j++){ 		
+									if(exportGroupList[i].id == exportItemList[j].group){ 
+										var title=[];
+										var title_content=[];
+										tr.push('<tr">');
+										
+										tr.push("<td>"+exportItemList[j].start+"</td>");
+										tr.push("<td>"+exportItemList[j].end+"</td>");
+										tr.push("<td>"+exportGroupList[i].cmpySerialNo+"</td>");
+										tr.push("<td>"+exportGroupList[i].mfgPartNo+"</td>");
+										tr.push("<td>"+exportGroupList[i].companyPartNo+"</td>");
+										tr.push("<td>"+exportGroupList[i].mnfgSerialNo+"</td>");
+										tr.push("<td>"+exportGroupList[i].classification+"</td>");
+										tr.push("<td>"+exportGroupList[i].description+"</td>");
+										tr.push("<td>"+exportGroupList[i].tailNo+"</td>");
+										tr.push("<td>"+exportGroupList[i].fleetNo+"</td>");
+										tr.push("<td>"+exportGroupList[i].subfleetNo+"</td>");
+										tr.push("<td>"+exportGroupList[i].ataSystemNo+"</td>");
+										tr.push("<td>"+exportGroupList[i].status+"</td>");
+										
+										
+										
+								
+										
+										
+										
+									if(exportItemList[j].content == ""){
+										
+										
+										if(exportItemList[j].title != null){
+										title=(exportItemList[j].title).split("<br/>");
+										////console.log(JSON.stringify(title))
+										////console.log(JSON.stringify(title.length))
+										for(z=0;z<title.length;z++){
+											////console.log(JSON.stringify(title[z]))	
+										title_content[z]=title[z].split(":")
+										}
+										for(k=5;k<title_content.length;k++){
+											tr.push("<td>"+title_content[k][1]+"</td>");
+										}
+									}else{
+										for(k=0;k<2;k++){
+										tr.push("<td> </td>");	
+										}
+										
+									}
+									} if(exportItemList[j].content != ""){
+										for(k=0;k<3;k++){
+											tr.push("<td> </td>");	
+											}
+										title=(exportItemList[j].content).split("<br/>");
+										for(z=0;z<title.length;z++){
+											////console.log(JSON.stringify(title[z]))	
+										title_content[z]=title[z].split(":")
+										}
+										//console.log(JSON.stringify(title_content))
+										for(k=3;k<title_content.length-1;k++){
+											tr.push("<td>"+title_content[k][1]+"</td>");
+											
+										}
+									} 
+									
+										tr.push('</tr>');
+							}
+
+					   } 
+				  }
+	
+					$('table[id=filterListTable]').append($(tr.join('')));
+fnExcelReport() ;
+}
+
+
+function fnExcelReport() {
+
+    var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+    tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+
+    tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+
+    tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+    tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+
+    tab_text = tab_text + "<table border='1px'>";
+    tab_text = tab_text + $('#filterListTable').html();
+    tab_text = tab_text + '</table></body></html>';
+
+    var data_type = 'data:application/vnd.ms-excel';
+    
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+        if (window.navigator.msSaveBlob) {
+            var blob = new Blob([tab_text], {
+                type: "application/csv;charset=utf-8;"
+            });
+            navigator.msSaveBlob(blob, 'Test file.xls');
+        }
+    } else {
+        $('#test').attr('href', data_type + ', ' + encodeURIComponent(tab_text));
+        $('#test').attr('download', 'Test file.xls');
+    }
+
+}
+
+</script>
+
+
+	<div id="light" class="white_content">
+		Removal Data: <a style="text-align: right;" href="javascript:void(0)"
+			onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+		<br />Date: 2014-11-21 <br />Removal Reason: 02
+
+	</div>
+	<div id="fade" class="black_overlay"></div>
+</body>
+</html>

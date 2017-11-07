@@ -1,0 +1,593 @@
+<html><!DOCTYPE html>
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=0" /> 
+<meta http-equiv="cache-control" content="no-cache" /> 
+
+<title>Filter Editor Screen</title>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/unitFilter.css">
+<link rel="stylesheet" href="css/index.css">
+
+<script src="Utility.js"></script>
+<script src="js/unit.js"></script>
+<script src="js/menu.js"></script>
+
+<!-- <script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+<style> 
+.navbar-default {
+    background-color: #6e1414;
+  
+}
+
+	.navbar {
+    margin-bottom: 0;
+    background-color: #01579B;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    font-weight: 600;
+    position: static;
+}
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+}
+
+
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 600px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+	 margin: 10px;
+    border-radius: 13PX;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+	#clearAll{
+	 padding-left: 32px;
+    padding-right: 32px;
+
+	}
+	#saveFilter{
+	 padding-left: 25px;
+    padding-right: 25px;
+	}
+
+	
+	
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content_main {height: 1110px;}
+    
+    /* Set gray background color and 100% height */
+    .sidenav_main {
+      background-color: #f1f1f1;
+      height: 100%;
+	 margin: 10px;
+    border-radius: 13PX;
+    margin-left: 3%;
+    }
+    
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav_main {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+	.msgModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.msgModal-content1 {
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #1c1919;
+    width: 30%;
+    font-size: 22px;
+    background-color: #e7ecec;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#msg{
+color:green;
+}
+
+#error{
+color:red;
+}
+
+/* button#displayReport {
+    width: 340px;
+    height: 80px;
+    font-size: 22px;
+} */
+
+.finalButton {
+    margin-left:42%;
+  /*  margin-top:10%; */
+  /*  margin-bottom: 5%; */
+}
+input[type=radio] {
+     width: 15px;
+    height: 14px;
+    margin-right: 4px;
+} 
+
+.col-sm-1.midButton {
+    margin-top: 38px;
+    margin-right: 19px;
+}
+button#displayReport {
+    width: 32%;
+    height: 5%;
+    font-size: 20px;
+    font-family: "Arial", Helvetica, sans-serif;
+}
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('img/loading.gif') 50% 50% no-repeat ;
+	display: none;
+}
+
+</style>
+
+</head>
+<body onload="loadRecentFilter()">
+	<!-- Top Logo Header -->
+	<nav id="home"  class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+					
+<!-- 					<img alt="client" width="11%" src="img/Cloud Image.png" style="margin-left: -618px "> -->
+<!-- 					<img alt="client" src="img/cg.jpg" width="25%" style="margin-left: -341px; "> -->
+			<img alt="client" src="img/logo.png" height="60px" width ="235px" style="margin-left:-850px">
+<!-- 			<img alt="client" src="img/fedex.png" height="60px" width="200px"> -->
+			<!-- <a class="navbar-brand" href="index.html">Aviation</a>-->
+			<label class="navbar-brand" style="margin-left: 508px;margin-bottom: -17px;padding-top: 20px;;">Unit Based Filter Editor</label>
+			<label></label>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right">
+				
+	
+				                        
+<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span>                                                               </a>
+<ul class="dropdown-menu">
+<li><a href="afterLogin.html">HOME</a></li>
+
+<!-- <li><a href="Unit_Filter.html">Filter Editor</a></li> -->
+<li><a href="Splash_Screen.html">Component Analysis</a></li>
+</ul></li>
+				
+				<li><a href="index.html" id="logout">LOGOUT</a></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	<!-- End of Top Logo Header -->
+
+		
+
+
+	<!--Left content -->
+
+
+
+
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <h5><label for="filterName">Filter Name:</label><h5>
+	  
+  <input type="text" class="form-control" id="filterName" placeholder="Enter filter name">
+      <hr id="seperator_line">
+	  
+	        <h5><label for="fromDate">From:</label>
+	  
+  <input type="date" class="form-control" id="fromDate" ></h5>
+  	        
+			<h5><label for="toDate">To:</label>
+	  
+  <input type="date" class="form-control" id="toDate" onchange="functionFromDate();"></h5>
+      <hr id="seperator_line">
+	  
+	  <h5><label for="filterBy">Filter By:</label></h5>
+	  <input type="hidden" name="filterID" id="filterID"/>  
+  <h5><input type="checkbox"  name="installedUnit" id="installedUnit" onchange="filterStatus()"> Installed Unit</h5>
+  <h5><input type="checkbox"  name="newUnit" id="newUnit" onchange="filterStatus()"> New Unit</h5>
+  <h5><input type="checkbox"  type="checkbox" name="removedUnit" id="removedUnit" onchange="filterStatus()" > Removed Unit</h5>
+      <hr id="seperator_line">
+	  
+	  
+	  
+  <h5><center><input type="button" class="btn btn-primary" value="Save Filter" id="saveFilter" onclick="saveFilter();"><center></h5>
+  <h5><center><input type="button" class="btn btn-primary" value="Show Filter List" data-toggle="modal" data-target="#LoadFilter" onclick="loadFilterList()"><center></h5>
+  <h5><center><input type="button" class="btn btn-primary" value="Clear All" onclick="clearAll()" id="clearAll"><center></h5>
+   
+      <hr id="seperator_line">
+	  	  
+
+    </div>	
+<div class="loader"></div>
+  <div class="row content_main">
+  
+    <div class="col-sm-9 sidenav_main">
+    <div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="row">
+				<div class="col-sm-1">
+				</div>
+					<div class="col-sm-10">
+						 <center><h5><label for="fleetNo">Fleet Model</label><h5></center>
+					</div>
+					
+				</div>
+				<div class="row">
+				<div class="col-sm-1">
+				</div>
+					<div class="col-sm-4">
+				 		<input placeholder="Search..." id="fleet" type="text" class="search" onchange="searchData('fleetNo')"  /> 
+				 		<form>
+							<select name="fleet" class="sort_option sort_fleet" style="height: 150px;" id="fleetNo" multiple>
+							  
+							</select>
+						</form>	
+					</div>
+					<div class="col-sm-1 midButton">
+							<input type="button" value=">>" class="list-clear-btn" id="fleetPush" onclick="PushToSelectedList('fleetNo','fleetValue');"  ><br><br>
+						    <input type="button" value="<<" class="list-clear-btn" id="fleetClear" onclick="ClearSelectedList('fleetValue','fleetNo');"  >
+						
+			        </div>
+					<div class="col-sm-4">
+							<input placeholder="Search..." id="fleet1" type="text" class="search"  />
+							<form>
+						    <select name="fleet" class="sort_option sort_fleet" style="height: 150px;" id="fleetValue" multiple>
+						   </select><br><br>
+						   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						   <input type="button" value="Submit" class="list-clear-btn" id="fleetNoSubmit" onclick="getFleets()"  >
+						   </form>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-sm-6">	
+					
+			   
+				
+				
+							<div class="row">
+							<div class="col-sm-2">
+				</div>
+					<div class="col-sm-10">
+						 <center><h5><label for="subFleet">Sub-Fleet Number</label><h5></center>
+					</div>
+					
+				</div>
+				
+				
+				<div class="row">
+     			<div class="col-sm-2">
+				</div>
+     			   <div class="col-sm-4">
+     			   <input placeholder="Search..." id="subFleet" type="text" class="search" onchange="searchData('subfleetNo')"/> 
+					<form action="#">
+						<select name="subFleet" class="sort_option sort_subFleet" style="height: 150px;" id="subfleetNo"
+							multiple>
+												</select> 
+	                  </form>
+	                  </div>
+	                    <div class="col-sm-1 midButton">
+	                       <input type="button" value=">>" class="list-clear-btn" id="subfleetPush" onclick="PushToSelectedList('subfleetNo','subfleetValue');"><br><br>
+						  <input type="button" value="<<" class="list-clear-btn" id="subfleetClear" onclick="ClearSelectedList('subfleetValue','subfleetNo');">
+	                  </div>
+	                  <div class="col-sm-4">
+	                  <input placeholder="Search..." id="subFleet1" type="text" class="search sort_option" /> 
+	                  <form action="#">
+						<select name="subFleet" class="sort_option sort_subFleet1" style="height: 150px;" id="subfleetValue"
+							multiple>
+						
+						</select><br><br>
+						  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Submit" class="list-clear-btn"  id="subfleetSubmit" onclick="getSubFleets()" >
+					</form>
+					</div>
+					</div>
+			
+			</div>
+    
+    
+      
+
+     
+      </div>
+      <br><br>
+	  
+	  <div class="row">
+								<div class="col-sm-6">
+				
+				
+				
+				<div class="row">
+				<div class="col-sm-1">
+				</div>
+					<div class="col-sm-10">
+						 <center><h5><label for="tailNumber">Tail Number</label><h5></center>
+					</div>
+					
+				</div>
+				
+				
+				<div class="row">
+				<div class="col-sm-1">
+				</div>
+					 <div class="col-sm-4">
+					<input placeholder="Search..." id="tail" type="text" class="search" onchange="searchData('tailNo')" /> 
+					<form action="#">
+						<select name="cars" class="sort_option sort_tail" style="height: 150px;" id="tailNo"
+							multiple>
+							</select>
+				    </form>
+				    </div>
+				    
+				    <div class="col-sm-1 midButton">
+				    
+						<input type="button" name="tailnoSelect" value=">>" class="list-clear-btn" id="tailPush" onclick="PushToSelectedList('tailNo','tailValue');"><br><br>
+				        <input type="button" name="tailnoClear" value="<<" class="list-clear-btn" id="tailClear" onclick="ClearSelectedList('tailValue','tailNo');">
+						
+				    </div>
+				    <div class="col-sm-4">
+				    <input placeholder="Search..." id="tail1" type="text" class="search" /> 
+				   			 <form>
+							<select name="cars" class="sort_option sort_tail1" style="height: 150px;" id="tailValue"
+							multiple>	
+						</select> <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" value="Submit" class="list-clear-btn" id="tailSubmit" onclick="getTailNo()">
+						</form>
+					</div>
+					</div>
+					</div>
+					
+					
+					
+									<div class="col-sm-6">
+					
+	
+				
+				
+				
+				<div class="row">
+				<div class="col-sm-2">
+				</div>
+					<div class="col-sm-10">
+						 <center><h5><label for="ataSystemNumber">ATA System Number</label><h5></center>
+					</div>
+					
+				</div>
+				
+				<div class="row">
+				<div class="col-sm-2">
+				</div>
+					<div class="col-sm-4">
+					
+					
+							<input placeholder="Search..." id="ataNo" type="text" class="search"  onchange="searchData('ataSystemNo')"/> 
+						<form action="#">
+							<select name="ataSystemNumber" class="sort_option sort_ataNo"
+								style="height: 150px;" id="ataSystemNo" multiple>	
+							</select> 
+						</form>
+						</div>
+						 <div class="col-sm-1 midButton">
+						    <input type="button" name="ATASelect" value=">>" class="list-clear-btn" id="ataPush" onclick="PushToSelectedList('ataSystemNo','ataValue');"><br><br>
+							<input type="button" name="ATAClear" value="<<" class="list-clear-btn" id="ataClear" onclick="ClearSelectedList('ataValue','ataSystemNo');">
+						</div>
+						<div class="col-sm-4">
+						<input placeholder="Search..." id="ataNo1" type="text" class="search" /> 
+						   <form action="#">
+							<select name="ataSystemNumber" class="sort_option sort_ataNo1"
+								style="height: 150px;" id="ataValue" multiple>
+								
+							</select>
+							<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="button" value="Submit" class="list-clear-btn" id="ataSubmit" onclick="getATASystemNo()">
+						</form>
+					</div>
+				</div>	
+					
+				</div>
+	  </div>
+	  <br><br>
+	 	<div class="row "  >
+					<div class="col-sm-6">
+			
+				<div class="row">
+				<div class="col-sm-1">
+				</div>
+					<div class="col-sm-10">
+						 <center><h5><label for="companyPartNumber">Company Part Number</label><h5></center>
+					</div>
+					
+				</div>
+				
+				
+				
+				<div class="row">
+				<div class="col-sm-1">
+				</div>
+					 <div class="col-sm-4">
+						<input placeholder="Search..." id="cpnNo" type="text" class="search" onchange="searchData('companyPartNo')"  /> 
+					<form action="#">
+						<select name="companyPartNumber" class="sort_option sort_cpnNo"
+							style="height: 150px;" id="companyPartNo" multiple>
+						
+						</select>
+					</form>
+					</div>
+					<div class="col-sm-1 midButton">
+					<input type="button" name="cpnSelect" value=">>" class="list-clear-btn" id="companyPush" onclick="PushToSelectedList('companyPartNo','companyValue');" ><br><br>
+				    <input type="button" name="cpnClear" value="<<" class="list-clear-btn" id="companyClear" onclick="ClearSelectedList('companyValue','companyPartNo');" >
+					</div>
+					<div class="col-sm-4">
+					<input placeholder="Search..." id="cpnNo1" type="text" class="search" />
+					<form action="#">
+						<select name="companyPartNumber" class="sort_option sort_cpnNo1"
+							style="height: 150px;" id="companyValue" multiple>
+										</select><br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						<input type="button" value="Submit" class="list-clear-btn" onclick="getCompanyPartNo()" id="companySubmit" >
+					</form>
+					</div>
+					</div>
+					</div>
+					
+					<div class="col-sm-6">
+			
+				<div class="row">
+				<div class="col-sm-2">
+				</div>
+					<div class="col-sm-10">
+						 <center><h5><label for="mfgPartNumber">MFG Part Number</label><h5></center>
+					</div>
+					
+				</div>
+				
+				<div class="row">
+				<div class="col-sm-2">
+				</div>
+					 <div class="col-sm-4">
+							<input placeholder="Search..." id="mfgNo" type="text" class="search" onchange="searchData('mfgPartNo')"/> 
+						<form action="#">
+							<select name="mfgPartNumber" class="sort_option sort_mfgNo"
+								style="height: 150px;" id="mfgPartNo" multiple>
+								
+							</select>
+						</form>
+						</div>
+						<div class="col-sm-1 midButton">
+						<input type="button" name=MPNSelect value=">>" class="list-clear-btn" id="mfgPush" onclick="PushToSelectedList('mfgPartNo','mfgValue');"><br><br>
+							 <input type="button"  name="MPNClear" value="<<" class="list-clear-btn" id="mfgClear" onclick="ClearSelectedList('mfgValue','mfgPartNo');">
+						</div>
+						<div class="col-sm-4">
+						<input placeholder="Search..." id="mfgNo1" type="text" class="search" />
+						<form action="#">
+							<select name="mfgPartNumber" class="sort_option sort_mfgNo1"
+								style="height: 150px;" id="mfgValue" multiple>
+								
+							</select> 
+							<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							 <input type="button" value="Submit" class="list-clear-btn" onclick="getMFGPartNo()" id="mfgSubmit">
+						</form>
+					</div>
+					</div>
+					
+			</div>
+						
+					</div>
+	</div>
+		<br><br>
+	<div class="finalButton">
+							<button type="button" class="btn btn-primary style_btn"
+								style="border-radius: 15px; margin-left: 10px;"
+								id="displayReport" onclick="getFilteredData(); ">Display<br>
+								Historical Analysis</button>
+				</div>
+	</div>
+
+	</div>
+	</div>
+<div id="LoadFilter" class="modal fade" data-backdrop="static" role="dialog">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header"> 
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="model-title" align="center" id="modelStyle" >Saved Filters</h4>
+		</div>
+		<div class="modal-body">
+		   <table class="table table-striped table-bordered" id="filterListTable">
+		   </table>
+			
+		</div>
+		
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal" id="modelClose">Close</button>
+		</div>
+	</div>
+</div>
+ </div>
+ 
+ <div id="msgModal" class="msgModal">
+  <!-- Modal content -->
+  <div class="msgModal-content1">
+    <span class="close" id="close">x</span>
+    <p id="msg"></p>
+    <p id="error"></p>
+    
+  </div>
+</div>
+</body>
+</html>
